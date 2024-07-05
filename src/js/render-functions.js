@@ -1,6 +1,10 @@
 // import { userSourse } from "./pixabay-api";
+const keyPhoto = {
+    imgsrc: document.querySelector(".img-list")
+}
 
-function createMarcup(arr){
+function createMarcup(arr) {
+    console.log("arr", arr)  //  перевірка масиву
     return arr.map(
         ({}) =>`
         <li class="container-list">

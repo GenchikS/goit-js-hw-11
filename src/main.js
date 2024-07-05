@@ -5,6 +5,10 @@ const list = document.querySelector(".list");
 const inputText = document.querySelector(".input-text");
 const inputButton = document.querySelector(".input-button");
 
+// const keyPhoto = {
+//     imgsrc: document.querySelector(".img-list")
+// }
+
 
 inputText.addEventListener(`input`, handleSubmit);
 
@@ -32,6 +36,8 @@ function buttonClick() {
 function listCreateMarcup(user) {
     list.insertAdjacentHTML("beforeend", createMarcup(user));  //  ф-ція виклику створення скелету розмітки
 }
+
+
 
 
 
