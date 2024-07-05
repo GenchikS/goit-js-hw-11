@@ -1,46 +1,69 @@
 import {createMarcup} from "./js/render-functions";
-const cars = [
-  {
-    id: 1,
-    model: "Honda",
-    type: "Civic",
-    price: 12000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTCOHzdE-dK6WK7ax8NzQolTcCWA_jhJD-CRGWfqKJIJuGs8ML_-OyiDwzsdC8jOi_K10&usqp=CAU",
-  },
-  {
-    id: 2,
-    model: "Audi",
-    type: "Q7",
-    price: 40000,
-    img: "https://upload.wikimedia.org/wikipedia/commons/8/8b/2017_Audi_Q7_S_Line_Quattro_3.0_Front.jpg",
-  },
-  {
-    id: 3,
-    model: "BMW",
-    type: "5 series",
-    price: 9000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUH96e58ynLO8SXMsFTNYkJci79eAZ8CyqcZsZ8snvzz2sfLl3Ojd1BQoaWBcrMKWvSYc&usqp=CAU",
-  },
-  {
-    id: 4,
-    model: "Honda",
-    type: "Accord",
-    price: 20000,
-    img: "https://upload.wikimedia.org/wikipedia/commons/7/76/2021_Honda_Accord_Sport_%28facelift%29%2C_front_11.30.21.jpg",
-  },
-  {
-    id: 5,
-    model: "Volvo",
-    type: "XC60",
-    price: 7000,
-    img: "https://www.volvocars.com/media/shared-assets/master/images/pages/my19/xc60-my19/accessories/xc60my19_accessories_exteriorfeature2_1.jpg?w=320",
-  },
-];
+// import { userSourse } from "./js/pixabay-api";
 
 const list = document.querySelector(".list");
+const inputText = document.querySelector(".input-text");
+const inputButton = document.querySelector(".input-button");
 
-console.log("list", list);
 
-list.insertAdjacentHTML("beforeend", createMarcup(cars))
+inputText.addEventListener(`input`, handleSubmit);
+
+let inputTextUser = "";
+let userPhotoAll = {};
+
+function handleSubmit(event) {
+  inputTextUser = (event.currentTarget.value).trim();
+  // console.log("inputTextUser", inputTextUser)  //  перевірка введеного аргументу
+  return inputTextUser
+}
+
+
+inputButton.addEventListener(`click`, buttonClick);
+
+function buttonClick() {
+  if (inputTextUser === "") {
+  return
+  } else {
+      userSourse(inputTextUser.toString());
+    //   console.log("inputTextUser", typeof (inputTextUser))  //   перевірка обробленного аргументу
+      userPhotoAll = userSourse(inputTextUser);
+    //   console.log("userSourse", userSourse)
+      return userPhotoAll
+                        .then((value) => console.log(value.hits))
+                        .catch((error) => console.log("error", error))
+        
+      
+    }
+}
+
+
+const API_KEY = `44770113-cb4279c01992ac20f8c79d080`;
+
+function userSourse() {
+    return fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${inputTextUser}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+      return response.json();
+    })
+}
+
+userSourse().then((response) =>response)
+    .catch((rejected) => console.log("error", rejected))
+              
+
+// console.log("userPhotoAll", userPhotoAll)
+// const all = userPhotoAll
+//     .then((value) => console.log(value))
+//     .catch((error) => console.log("error", error))
+// console.log("userSourse", userSourse)
+// list.insertAdjacentHTML("beforeend", createMarcup(inputTextUser));  //  створення скелету розмітки
+
+
+
+
+
+
 
 

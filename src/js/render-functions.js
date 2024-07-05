@@ -1,3 +1,4 @@
+// import { userSourse } from "./pixabay-api";
 
 function createMarcup(arr){
     return arr.map(
@@ -29,5 +30,8 @@ function createMarcup(arr){
 
 
 
+
+
+
 // ------  EXPORT  ------
-export {createMarcup};
+export { createMarcup};
