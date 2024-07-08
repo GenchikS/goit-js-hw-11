@@ -11,6 +11,7 @@ import { getImages } from "./js/pixabay-api";
 
 const inputForm = document.querySelector(".form");
 const gallery = document.querySelector(".gallery");
+const loading = document.querySelector(".loading");
 
 let userPhoto = new SimpleLightbox('.gallery a', {
     captions: true,
@@ -20,12 +21,17 @@ let userPhoto = new SimpleLightbox('.gallery a', {
     captionDelay: 250
 });
 
+loading.style.display = "none";
+
 inputForm.addEventListener(`submit`, handleSubmit);
 
 let inputText = "";
 
+loading.style.display = "visibility";
+
 function handleSubmit(event) {
   event.preventDefault();
+  loading.style.display = "visibility";
   const form = event.target;  //  доступ до форми
   inputText = (form.elements.input.value).trim();  //  отримання значення вводу в форму інпут + прибирання пробілів
   // console.log("eventTarget", inputText)  //  перевірка введеного значення
@@ -41,8 +47,10 @@ function handleSubmit(event) {
           });
         } else {
           gallery.innerHTML = "";
+          // iziToast.show({   //  підключення бібліотеки iziToast
+          //   title: 'Loading images, please wait ... ', timeout: 250, position: 'topCenter'
+          // });
           renderMarcup(data.hits)
-          userPhoto.next();
           userPhoto.refresh();
         }
        
@@ -50,9 +58,9 @@ function handleSubmit(event) {
       .catch((err) => console.log("error", err))
     }
   form.reset();
+  loading.style.display = "none";
 }
 
-// userPhoto.next()
 
 
 

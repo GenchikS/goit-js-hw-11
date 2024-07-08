@@ -81,13 +81,17 @@ input::placeholder{
   background: #6c8cff;
 }
 
+.loading{
+  text-align: center;
+}
+
 .gallery{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin: 0 156px 36px 156px;
   row-gap: 24px;
-  overflow:scroll;
+  overflow: visible;
 }
 
 .container-list{
