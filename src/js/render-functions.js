@@ -1,4 +1,4 @@
-const jsList = document.querySelector(".js-list");
+const gallery = document.querySelector(".gallery");
 
 function renderMarcup(arr) {
     // console.log("arr", arr)  //  перевірка масиву
@@ -31,7 +31,7 @@ function renderMarcup(arr) {
     </li>
     `).join(``)
 
-    jsList.insertAdjacentHTML("beforeend", marcup);  //  ф-ція виклику створення скелету розмітки
+    gallery.insertAdjacentHTML("beforeend", marcup);  //  ф-ція виклику створення скелету розмітки
 }
 
 

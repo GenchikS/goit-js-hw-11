@@ -81,7 +81,7 @@ input::placeholder{
   background: #6c8cff;
 }
 
-.js-list{
+.gallery{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

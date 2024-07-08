@@ -10,9 +10,7 @@ import {renderMarcup} from "./js/render-functions";
 import { getImages } from "./js/pixabay-api";
 
 const inputForm = document.querySelector(".form");
-const containerList = document.querySelector(".gallery");
-
-let userPhotoAll = [];
+const gallery = document.querySelector(".gallery");
 
 let userPhoto = new SimpleLightbox('.gallery a', {
     captions: true,
@@ -42,8 +40,11 @@ function handleSubmit(event) {
             title: 'Sorry, there are no images matching your search query. Please try again!',
           });
         } else {
+          gallery.innerHTML = "";
           renderMarcup(data.hits)
+          userPhoto.refresh();
         }
+       
       })  //  при response звернення іде до ключа hits та викликається ф-ція виклику створення скелету розмітки з отриманим масивом
       .catch((err) => console.log("error", err))
     }
