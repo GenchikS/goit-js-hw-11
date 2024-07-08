@@ -1,59 +1,58 @@
 import SimpleLightbox from "simplelightbox";
 // console.log(SimpleLightbox)  //  перевірка підключення бібліотеки
 import "simplelightbox/dist/simple-lightbox.min.css";
+// Описаний у документації
+import iziToast from "izitoast";
+// Додатковий імпорт стилів
+import "izitoast/dist/css/iziToast.min.css";
 
-import {inputTextUser, createMarcup, handleSubmit} from "./js/render-functions";
-import { userSourse } from "./js/pixabay-api";
+import {renderMarcup} from "./js/render-functions";
+import { getImages } from "./js/pixabay-api";
 
-
-const jsList = document.querySelector(".js-list");
-const inputText = document.querySelector(".input-text");
-const inputButton = document.querySelector(".input-button");
+const inputForm = document.querySelector(".form");
 const containerList = document.querySelector(".gallery");
-
-inputText.addEventListener(`input`, handleSubmit);
 
 let userPhotoAll = [];
 
-
-inputButton.addEventListener(`click`, buttonClick);
-
-function buttonClick() {
-  jsList.innerHTML = "";
-  if (inputTextUser === "") {
-  return
-  } else {
-      userSourse(inputTextUser);
-      // console.log("inputTextUser", typeof (inputTextUser))  //   перевірка обробленного аргументу
-      userPhotoAll =
-          userSourse(inputTextUser)
-                                .then((value) => listCreateMarcup(value.hits))  // передача агрументу value.hits ф-ції виклику створення скелету розмітки
-                                .catch((error) => console.log("error", error));
-                                
-          //  console.log("userPhotoAll", userPhotoAll)  //  отримано промис
-        inputText.value = "";
-  }
-}
-
-
-function listCreateMarcup(user) {
-  jsList.insertAdjacentHTML("beforeend", createMarcup(user));  //  ф-ція виклику створення скелету розмітки
-}
-
-
-containerList.addEventListener("click", createSimpleLightbox)
-
-function createSimpleLightbox() {
- let userPhoto = new SimpleLightbox('.gallery a', {
+let userPhoto = new SimpleLightbox('.gallery a', {
     captions: true,
     captionType: 'attr',
     captionsData: 'alt',
     captionPosition: 'bottom',
     captionDelay: 250
 });
+
+inputForm.addEventListener(`submit`, handleSubmit);
+
+let inputText = "";
+
+function handleSubmit(event) {
+  event.preventDefault();
+  const form = event.target;  //  доступ до форми
+  inputText = (form.elements.input.value).trim();  //  отримання значення вводу в форму інпут + прибирання пробілів
+  // console.log("eventTarget", inputText)  //  перевірка введеного значення
+  if (inputText === "") {
+    return
+  } else {
+    getImages(inputText)
+      .then((data) => {
+        // console.log("data", data.hits)  //  перевірка отриманого масиву
+        if (Number(data.hits.length) === 0) {  //  умова перевірки на пустий масив
+          iziToast.show({   //  підключення бібліотеки iziToast
+            title: 'Sorry, there are no images matching your search query. Please try again!',
+          });
+        } else {
+          renderMarcup(data.hits)
+        }
+      })  //  при response звернення іде до ключа hits та викликається ф-ція виклику створення скелету розмітки з отриманим масивом
+      .catch((err) => console.log("error", err))
+    }
+  form.reset();
 }
 
-// userPhoto.show.simplelightbox(`loading....`);
+
+
+
 
 
 

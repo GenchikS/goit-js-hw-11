@@ -10,11 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
-  <div class="input-container">
-    <input type="text" class="input-text" placeholder="Search images...">
-    <button type="button" class="input-button">Search</button>
-  </div>  
-    <ul class="gallery js-list"></ul>
+    <form class="form">
+        <input type="text" name="input" class="input-text" placeholder="Search images...">
+        <button type="submit" class="input-button">Search</button>
+    </form>
+    
+  <ul class="gallery js-list"></ul>
 <script type="module" src="./js/pixabay-api.js"></script>  
 <script type="module" src="./js/render-functions.js"></script>
 <script type="module" src="./main.js"></script>

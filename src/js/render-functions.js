@@ -1,24 +1,9 @@
-// Описаний у документації
-import iziToast from "izitoast";
-// Додатковий імпорт стилів
-import "izitoast/dist/css/iziToast.min.css";
+const jsList = document.querySelector(".js-list");
 
-const keyPhoto = {
-    imgsrc: document.querySelector(".img-list")
-}
-
-let i = 0;
-
-function createMarcup(arr) {
+function renderMarcup(arr) {
     // console.log("arr", arr)  //  перевірка масиву
 
-    if (Number(arr.length) === 0) {  //  умова перевірки на пустий масив
-    iziToast.show({   //  підключення бібліотеки iziToast
-        title: 'Sorry, there are no images matching your search query. Please try again!',
-    }); 
-  }
-
-    return arr.map(
+    const marcup =  arr.map(
         ({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => `
         <li class="container-list">
             <a class="gallery-link" href="${largeImageURL}">
@@ -42,21 +27,18 @@ function createMarcup(arr) {
                 </li>
             </ul>
         </img>
+        </a>
     </li>
     `).join(``)
+
+    jsList.insertAdjacentHTML("beforeend", marcup);  //  ф-ція виклику створення скелету розмітки
 }
 
 
-let inputTextUser = "";
 
-function handleSubmit(event) {
-  inputTextUser = (event.currentTarget.value).trim();
-  // console.log("inputTextUser", inputTextUser)  //  перевірка введеного аргументу
-    return inputTextUser;
-}
 
 
 
 // ------  EXPORT  ------
-export { inputTextUser, createMarcup, handleSubmit };
+export {renderMarcup};
 
