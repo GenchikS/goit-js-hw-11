@@ -21,8 +21,8 @@ function createMarcup(arr) {
     return arr.map(
         ({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => `
         <li class="container-list">
-            <img class="img-list" src="${webformatURL}" alt="${tags}">
             <a class="gallery-link" href="${largeImageURL}">
+            <img class="img-list" src="${webformatURL}" alt="${tags}">
             <ul class="container-cart">
                 <li class="list-cart">
                     <p class="likes-cart">Likes</p>

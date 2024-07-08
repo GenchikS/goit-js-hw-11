@@ -9,7 +9,7 @@ import { userSourse } from "./js/pixabay-api";
 const jsList = document.querySelector(".js-list");
 const inputText = document.querySelector(".input-text");
 const inputButton = document.querySelector(".input-button");
-const containerList = document.querySelector(".container-list");
+const containerList = document.querySelector(".gallery");
 
 inputText.addEventListener(`input`, handleSubmit);
 
@@ -41,20 +41,19 @@ function listCreateMarcup(user) {
 }
 
 
- const onGalleryElementsClick = event => {
-    event.preventDefault();
+containerList.addEventListener("click", createSimpleLightbox)
 
-   const lightbox = new SimpleLightbox('.container-list a',
-     {
-       captionDelay: 250,
-       captionsData: 'alt',
-       captionPosition: 'bottom',
-       animationSpeed: 250
-     });
+function createSimpleLightbox() {
+ let userPhoto = new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionType: 'attr',
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250
+});
 }
 
-
-
+// userPhoto.show.simplelightbox(`loading....`);
 
 
 
