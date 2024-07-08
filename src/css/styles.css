@@ -87,6 +87,7 @@ input::placeholder{
   flex-wrap: wrap;
   margin: 0 156px 36px 156px;
   row-gap: 24px;
+  overflow:scroll;
 }
 
 .container-list{

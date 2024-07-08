@@ -42,6 +42,7 @@ function handleSubmit(event) {
         } else {
           gallery.innerHTML = "";
           renderMarcup(data.hits)
+          userPhoto.next();
           userPhoto.refresh();
         }
        
@@ -50,6 +51,9 @@ function handleSubmit(event) {
     }
   form.reset();
 }
+
+// userPhoto.next()
+
 
 
 
