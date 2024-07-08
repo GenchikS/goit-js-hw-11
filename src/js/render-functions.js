@@ -1,30 +1,47 @@
+// Описаний у документації
+import iziToast from "izitoast";
+// Додатковий імпорт стилів
+import "izitoast/dist/css/iziToast.min.css";
+
 // import { userSourse } from "./pixabay-api";
+
+// import { i } from "../main";
+
 const keyPhoto = {
     imgsrc: document.querySelector(".img-list")
 }
 
+let i = 0;
+
 function createMarcup(arr) {
     console.log("arr", arr)  //  перевірка масиву
+
+    if (Number(arr.length) === 0) {  //  умова перевірки на пустий масив
+    iziToast.show({   //  підключення бібліотеки iziToast
+        title: 'Sorry, there are no images matching your search query. Please try again!',
+    }); 
+  }
+
     return arr.map(
-        ({}) =>`
+        ({webformatURL, tags, likes, views, comments, downloads}) =>`
         <li class="container-list">
-        <img class="img-list" src="" alt="">
+            <img class="img-list" src="${webformatURL}" alt="${tags}">
             <ul class="container-cart">
                 <li class="list-cart">
-                    <p class="likes-cart"></p>
-                    <p class="number-likes"></p>
+                    <p class="likes-cart">Likes</p>
+                    <p class="number-likes">${likes}</p>
                 </li>
                 <li class="list-cart">
-                    <p class="views-cart"></p>
-                    <p class="number-views"></p>
+                    <p class="views-cart">Views</p>
+                    <p class="number-views">${views}</p>
                 </li>
                 <li class="list-cart">
-                    <p class="comments-cart"></p>
-                    <p class="number-comments"></p>
+                    <p class="comments-cart">comments</p>
+                    <p class="number-comments">${comments}</p>
                 </li>
                 <li class="list-cart">
-                    <p class="downloads-cart"></p>
-                    <p class="number-downloads"></p>
+                    <p class="downloads-cart">downloads</p>
+                    <p class="number-downloads">${downloads}</p>
                 </li>
             </ul>
         </img>
@@ -43,4 +60,5 @@ function handleSubmit(event) {
 
 
 // ------  EXPORT  ------
-export { inputTextUser, createMarcup, handleSubmit};
+export { inputTextUser, createMarcup, handleSubmit };
+
