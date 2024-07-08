@@ -3,10 +3,6 @@ import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
-// import { userSourse } from "./pixabay-api";
-
-// import { i } from "../main";
-
 const keyPhoto = {
     imgsrc: document.querySelector(".img-list")
 }
@@ -14,7 +10,7 @@ const keyPhoto = {
 let i = 0;
 
 function createMarcup(arr) {
-    console.log("arr", arr)  //  перевірка масиву
+    // console.log("arr", arr)  //  перевірка масиву
 
     if (Number(arr.length) === 0) {  //  умова перевірки на пустий масив
     iziToast.show({   //  підключення бібліотеки iziToast
@@ -23,9 +19,10 @@ function createMarcup(arr) {
   }
 
     return arr.map(
-        ({webformatURL, tags, likes, views, comments, downloads}) =>`
+        ({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => `
         <li class="container-list">
             <img class="img-list" src="${webformatURL}" alt="${tags}">
+            <a class="gallery-link" href="${largeImageURL}">
             <ul class="container-cart">
                 <li class="list-cart">
                     <p class="likes-cart">Likes</p>
@@ -46,8 +43,9 @@ function createMarcup(arr) {
             </ul>
         </img>
     </li>
-    `).join(``);
+    `).join(``)
 }
+
 
 let inputTextUser = "";
 

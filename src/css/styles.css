@@ -82,16 +82,15 @@ input::placeholder{
   flex-direction: row;
   flex-wrap: wrap;
   margin: 0 156px 36px 156px;
-  gap: 24px;
-
+  row-gap: 24px;
 }
 
 .container-list{
   border: 1px solid #808080;
   width: 360px;
   height: 200px;
-  gap: 24px;
   position: relative;
+  margin-left: 24px;
 }
 
 .img-list {

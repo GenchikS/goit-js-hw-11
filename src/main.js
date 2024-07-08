@@ -1,14 +1,15 @@
+import SimpleLightbox from "simplelightbox";
+// console.log(SimpleLightbox)  //  перевірка підключення бібліотеки
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 import {inputTextUser, createMarcup, handleSubmit} from "./js/render-functions";
 import { userSourse } from "./js/pixabay-api";
+
 
 const jsList = document.querySelector(".js-list");
 const inputText = document.querySelector(".input-text");
 const inputButton = document.querySelector(".input-button");
-
-// const keyPhoto = {
-//     imgsrc: document.querySelector(".img-list")
-// }
-
+const containerList = document.querySelector(".container-list");
 
 inputText.addEventListener(`input`, handleSubmit);
 
@@ -18,6 +19,7 @@ let userPhotoAll = [];
 inputButton.addEventListener(`click`, buttonClick);
 
 function buttonClick() {
+  jsList.innerHTML = "";
   if (inputTextUser === "") {
   return
   } else {
@@ -36,10 +38,23 @@ function buttonClick() {
 
 function listCreateMarcup(user) {
   jsList.insertAdjacentHTML("beforeend", createMarcup(user));  //  ф-ція виклику створення скелету розмітки
- }
+}
 
 
-// -----  EXPORT -----
+ const onGalleryElementsClick = event => {
+    event.preventDefault();
+
+   const lightbox = new SimpleLightbox('.container-list a',
+     {
+       captionDelay: 250,
+       captionsData: 'alt',
+       captionPosition: 'bottom',
+       animationSpeed: 250
+     });
+}
+
+
+
 
 
 
