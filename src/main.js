@@ -43,15 +43,15 @@ function handleSubmit(event) {
         // console.log("data", data.hits)  //  перевірка отриманого масиву
         if (Number(data.hits.length) === 0) {  //  умова перевірки на пустий масив
           iziToast.show({   //  підключення бібліотеки iziToast
-            title: 'Sorry, there are no images matching your search query. Please try again!',
+            title: 'Sorry, there are no images matching your search query. Please try again!'
           });
         } else {
-          gallery.innerHTML = "";
+          gallery.innerHTML = "";  //  очистка попереднього контенту
           // iziToast.show({   //  підключення бібліотеки iziToast
           //   title: 'Loading images, please wait ... ', timeout: 250, position: 'topCenter'
           // });
           renderMarcup(data.hits)
-          userPhoto.refresh();
+          userPhoto.refresh();  //  виклик та можливість зміни фото в модальному вікні
         }
        
       })  //  при response звернення іде до ключа hits та викликається ф-ція виклику створення скелету розмітки з отриманим масивом
